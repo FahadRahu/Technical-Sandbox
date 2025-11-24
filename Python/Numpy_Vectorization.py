@@ -3,7 +3,8 @@ import time
 
 """A quick deep dive into the performance benefits of NumPy vectorization over traditional nested for loops for matrix addition."""
 
-def main():
+"""Direct implementation of non-vectorized and vectorized addition of two matrices."""
+def direct():
     a = np.random.randint(0, 5, (4, 3))
     print(f"a is a 2-D matrix with the Shape {a.shape} and is: \n{a}\n") # a.shape is 4,3: prints a 4x3 array of random integers between 0 and 9
     b = np.random.randint(0, 5, (4, 1)) 
@@ -42,6 +43,7 @@ def main():
 
 
 # Trying to be fancy and encapsulate in a class
+"""A class encapsulating non-vectorized and vectorized addition of two matrices using NumPy."""
 class Small_Numpy_Vectorization:
     def __init__(self):
         # Initialize two matrices a and b and an empty matrix c
@@ -101,14 +103,66 @@ class Small_Numpy_Vectorization:
             # Perform Vectorized Addition
             print(f"Result c using Vectorized Addition: \n{self.c_vectorized}\n")
             # Verify that both methods yield the same result
-            print("Are both methods equal? ", np.array_equal(self.c_non_vectorized, self.c_vectorized))
+            if self.c_non_vectorized is not None and self.c_vectorized is not None:
+                print("Are both methods equal? ", np.array_equal(self.c_non_vectorized, self.c_vectorized))
 
         # Return the computed results so callers can use them programmatically
         return (self.c_non_vectorized, self.c_vectorized)
 
 
-if __name__ == "__main__":
-    main()
+def vector_exercise():
+    direct()
     print("----- Now using the class -----\n")
     vectorization_instance = Small_Numpy_Vectorization()
     vectorization_instance.report()
+
+"""A small utility function to demonstrate some basic properties of NumPy arrays."""
+def np_array_info():
+    """A small utility function to demonstrate some basic properties of NumPy arrays."""
+    arr = np.array([[1, 2, 3], [4, 5, 6]])
+    print(f"Array:\n{arr}") # Print the array
+    print(f"Shape: {arr.shape}") # Shape of the array
+    print(f"Data Type: {arr.dtype}") # Data type of the array elements
+    print(f"Number of Dimensions: {arr.ndim}") # Number of dimensions of the array
+    print(f"Size (Total number of elements): {arr.size}") # Total number of elements in the array
+    print(f"Item Size (in bytes): {arr.itemsize}") # Size of each element in bytes
+    print(f"Total Bytes: {arr.nbytes}") # Total bytes consumed by the array
+    print(f"Array Strides: {arr.strides}") # Strides indicate the number of bytes to step in each dimension when traversing the array
+    print(f"Is the array C-contiguous? {arr.flags['C_CONTIGUOUS']}") # Check if the array is stored in C-contiguous order
+
+def np_array_exercise():
+    # Creation of 1 Dimensional Array
+    arr_1d = np.array([10, 20, 30, 40, 50])
+    print("---1-D ARRAY---")
+    print(f"1D Array with shape {arr_1d.shape}:\n{arr_1d}",end="\n\n")
+
+    # Creation of 2 Dimensional Array
+    arr_2d = np.array( [ [1, 2, 3],[4, 5, 6] ] )
+    print("---2-D ARRAY---")
+    print(f"2D Array with shape {arr_2d.shape}:\n{arr_2d}",end="\n\n")
+
+    # Creation of 3 Dimensional Array
+    arr_3d = np.array([ [ [1],[2] ], [ [3],[4] ], [ [5], [6] ] ])
+    print("---3-D ARRAY---")
+    print(f"3D Array with shape {arr_3d.shape}:\n{arr_3d}",end="\n\n")
+    print(f"It has depth: {arr_3d.shape[0]}, rows: {arr_3d.shape[1]}, and columns: {arr_3d.shape[2]}",end="\n\n")
+
+    # Creation of 4 Dimensional Array
+    print("---4-D ARRAY---")
+    """Looking at the colored brackets seriously helps here - each additional set of brackets adds a new dimension."""
+    arr_4d = np.array([  [  [ [1],[2] ] , [ [3],[4]]  ] , [  [ [5],[6] ] , [ [7],[8] ]  ]  ])
+    print(f"4D Array with shape {arr_4d.shape}:\n{arr_4d}",end="\n\n")
+    print(f"It has rows: {arr_4d.shape[0]}, columns: {arr_4d.shape[1]}, depth: {arr_4d.shape[2]}, and blocks: {arr_4d.shape[3]}")
+    
+    # Creation of 5 Dimensional Array
+    """
+    Turning this off because it's a bit excessive for most use cases and clutters the output.
+    Uncomment if you want to see the 5D array example.
+    print("\n---5-D ARRAY---")
+    arr_5d = np.array([[[[[1], [2]], [[3], [4]]], [[[5], [6]], [[7], [8]]]], [[[[9], [10]], [[11], [12]]], [[[13], [14]], [[15], [16]]]]])
+    print(f"5D Array with shape {arr_5d.shape}:\n{arr_5d}",end="\n\n")
+    print(f"It has rows: {arr_5d.shape[0]}, columns: {arr_5d.shape[1]}, depth: {arr_5d.shape[2]}, blocks: {arr_5d.shape[3]}, and hyper-blocks: {arr_5d.shape[4]}")
+    """
+
+np_array_exercise()
+print("\n--- NumPy Array Info ---\n")
