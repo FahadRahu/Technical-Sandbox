@@ -14,7 +14,8 @@ class Solution:
         
         slow, fast = head, head
 
-        while fast and fast.next: # fast.next because if fast.next is None, fast.next.next will raise an error
+        # We don't need slow since it WILL be slow. I just want the type error to not happen in slow.next.
+        while fast and fast.next and slow: # fast.next because if fast.next is None, fast.next.next will raise an error
             slow = slow.next
             fast = fast.next.next
             if slow == fast:
