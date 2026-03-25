@@ -22,3 +22,22 @@ class Solution:
             for j in range(i + 1, n):
                 max_area = max(max_area, min(height[i], height[j]) * (j - i))
         return max_area
+
+class Solution_Resolve: # 3/24/2026
+    def maxArea(self, height: List[int]) -> int:
+        res = 0
+        a, b = 0, len(height) - 1
+
+        if not height:
+            return None # type: ignore
+
+        while a < b:
+            if height[a] < height[b]:
+                temp = height[a] * (b - a)
+                res = max(res, temp)
+                a = a + 1
+            if height[a] >= height[b]:
+                temp = height[b] * (b - a)
+                res = max(res, temp)
+                b = b - 1
+        return res
