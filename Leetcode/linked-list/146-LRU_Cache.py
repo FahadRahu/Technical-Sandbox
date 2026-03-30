@@ -12,14 +12,25 @@ class LRUCache:
         self.capacity = capacity
         # Key is just key, value is a Node object 
         self.cache = {}
+
+        # Left = LRU | Right = Most recent
+        # Default DLL just connected left and right
+        self.left, self.right = Node(0, 0), Node(0, 0)
+        self.left.next, self.right.prev = self.right, self.left
     
-    # Remove the node from the DLL
-    def remove(self, Node):
-        pass
+    # Remove the node from the DLL, the node itself still inherently exists in memory
+    def remove(self, node):
+        prev, nxt = node.prev, node.next
+        prev.next = nxt
+        nxt.prev = prev
     
     # Insert a given node at the end of a DLL
-    def insert(self, Node):
-        pass
+    def insert(self, node):
+        # Needs to go to the right
+        prev, nxt = self.right.prev, self.right
+        prev.next = node
+        nxt.prev = node
+        node.prev, node.next = prev, nxt
 
     def get(self, key: int) -> int:
         # Get the value of the key if it exists, else return -1
@@ -36,7 +47,7 @@ class LRUCache:
     def put(self, key: int, value: int) -> None:
         # If that key we are trying to put is already in cache, it needs to be removed first
         if key in self.cache:
-            self.remove[self.cache[key]]
+            self.remove(self.cache[key])
         self.cache[key] = Node(key, value) # Add the key:value(Node) to cache
         self.insert(self.cache[key]) # Change the DLL such that this new key is right-oriented
 
