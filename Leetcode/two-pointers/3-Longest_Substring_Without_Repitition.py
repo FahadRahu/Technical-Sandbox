@@ -16,3 +16,20 @@ class Solution:
             charSet.add(s[r])
             res = max(res, len(charSet)) # Instead of charSet.size, could have done "r - l + 1"
         return res
+
+class Solution2: # 3/31/2026
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        charSet = set() # Creates a set - unique items
+
+        # Create left pointer, and res - size of max string outputted at end
+        l = 0
+        res = 0
+
+        # Iterate through s, move right pointer when substring increase, left otherwise
+        for r in range(len(s)):
+            while s[r] in charSet: # Keep moving l pointer until dupe is gone, make space for it on r
+                charSet.remove(s[l])
+                l += 1
+            charSet.add(s[r])
+            res = max(res, len(charSet))
+        return res
