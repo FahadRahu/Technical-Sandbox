@@ -15,9 +15,9 @@ class Solution:
         q.append(root)
 
         # Breath first search (BFS)
-        while q:
-            qLen = len(q)
-            level = []
+        while q: # while the q has stuff in it
+            qLen = len(q) # check the length of the queue, this is the number of nodes that are going to be in this upcoming appended level list. We want to freeze this length because we are going to be adding more nodes to the queue as we pop nodes from the queue, and we don't want to add those new nodes to the current level list, we want to add them to the next level list.
+            level = [] # we create a new empty list for each level, and we will add the values of the nodes in the current level to this list, and then add this list to the result list at the end of the level
             for i in range(qLen):
                 node = q.popleft() # pops the leftmost element in the queue (whatever was added first - lowest index)
                 if node: # if node is not None, "None" gets added to the queue even when the current node is at its end
@@ -27,7 +27,24 @@ class Solution:
             if level:
                 res.append(level)
         return res
-    
+
+    """
+    Steps to Solve this Problem:
+    1. Make an empty result list to hold the final output
+    2. Create a queue
+    3. Add the root node to the queue
+    4. Iterate while the queue is not empty:
+        a. Get the length of the queue (this is the number of nodes in the current level)
+        b. Create an empty list to hold the values of the nodes in the current level
+        c. Iterate for the number of nodes in the current level:
+            i. Pop a node from the left of the queue
+            ii. If the node is not None:
+                - Add its value to the level list
+                - Add its left child to the queue
+                - Add its right child to the queue
+    """    
+
+
     """ 
         BFS Level-Order Traversal: Returns tree nodes grouped by level.
         
