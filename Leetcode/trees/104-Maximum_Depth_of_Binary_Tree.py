@@ -22,15 +22,17 @@ class Solution:
         if not root:
             return 0
         
-        stack: list[tuple[Optional[TreeNode], int]] = [(root, 1)]
+        # Stack will hold tuples of (node, depth)
+        stack: list[tuple[Optional[TreeNode], int]] = [(root, 1)] 
+        # Variable to keep track of the maximum depth encountered
         max_depth = 0
         
-        while stack:
-            node, depth = stack.pop()
+        while stack: # Loop until there are nodes to process in the stack
+            node, depth = stack.pop() # Get the current node and its depth from the stack
             if node:
-                max_depth = max(max_depth, depth)
-                stack.append((node.left, depth + 1))
-                stack.append((node.right, depth + 1))
+                max_depth = max(max_depth, depth) # Update max_depth if current depth is greater
+                stack.append((node.left, depth + 1)) # Add left child to stack with incremented depth
+                stack.append((node.right, depth + 1)) # Add right child to stack with incremented depth
         
         return max_depth
     
@@ -47,8 +49,17 @@ class Solution:
         while queue:
             node, depth = queue.popleft()
             if node:
-                max_depth = max(max_depth, depth)
-                queue.append((node.left, depth + 1))
-                queue.append((node.right, depth + 1))
+                max_depth = max(max_depth, depth) # Update max_depth if current depth is greater
+                queue.append((node.left, depth + 1)) # Add left child to queue with incremented depth
+                queue.append((node.right, depth + 1)) # Add right child to queue with incremented depth
         
         return max_depth
+
+class Solution2:
+    def maxDepth(self, root: Optional[TreeNode]) -> int:
+        # Base case - empty root
+        if not root:
+            return 0
+        
+        # Using recursion
+        return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
