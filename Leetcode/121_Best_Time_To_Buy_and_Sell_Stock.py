@@ -15,7 +15,7 @@ class Solution:
                 l = r # Because r is at a position lower than l is right now
             r += 1
         return maxP
-    
+    # Secondary way to solve it
     def maxProfit_two(self, prices: List[int]) -> int:
         min_price = prices[0]
         max_profit = 0
