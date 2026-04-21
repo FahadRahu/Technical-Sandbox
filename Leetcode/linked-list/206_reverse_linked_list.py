@@ -38,7 +38,7 @@ class Solution2:
         cur = head
         prev = None
 
-        while cur.next: # type: ignore # While cur.next is a valid value
+        while cur: # type: ignore # While cur.next is a valid value
             temp = cur.next # Saves the real og cur.next
             cur.next = prev # type: ignore # changes the pointer of .next to prev
             prev = cur # moves prev to cur
@@ -46,7 +46,6 @@ class Solution2:
 
         return prev # we return prev because at the end of the loop, cur will be None, and prev will be the last node in the original list, which is the new head of the reversed list
     
-
     """
     Thoughts:
     1 --> 2 --> 3 --> 4 --> 5
@@ -62,3 +61,37 @@ class Solution2:
     $ while cur.next # Checks if the next pointer is a value
     # How do we start with 1, point 1.next to None, and then go to 2?
     """
+
+class Solution3:
+    # Definition for singly-linked list.
+    # class ListNode:
+    #     def __init__(self, val=0, next=None):
+    #         self.val = val
+    #         self.next = next
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        """
+        We have head 0 -> 1 -> 2 --> None
+        we want: None <-- 0 | 1 --> 2 --> None
+        Then: None <-- 0 <-- 1 | 2 --> None
+        Strat:
+        1. Make 0 point to None
+        2. Make 1 point to 0?
+        3. Make 2 point to 1?
+        How?
+        1. Take cur, which is 0
+        2. Take prev, which is None
+        3. Save tmp, which is cur.next, which is 1
+        4. Set cur.next to prev
+        5. Set prev = cur
+        6. Set cur = tmp
+        """
+
+        prev = None
+        cur = head
+
+        while cur:
+            tmp = cur.next # Save the next before we change next pointer
+            cur.next = prev
+            prev = cur
+            cur = tmp
+        return prev
