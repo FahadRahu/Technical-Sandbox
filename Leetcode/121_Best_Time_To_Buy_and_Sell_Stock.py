@@ -1,6 +1,7 @@
 from typing import List
 
 class Solution:
+# Retry - 4/22/2026
     def maxProfit(self, prices: List[int]) -> int:
         l, r = 0, 1 # left=buy right=sell | These are INDICES not literal prices
         maxP = 0
