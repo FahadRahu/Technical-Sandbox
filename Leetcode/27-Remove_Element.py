@@ -1,6 +1,7 @@
 from typing import List
 
 class Solution:
+# Re-Solved 4/23/2026
     # Time complexity: O(n) | Space complexity: O(1)
     def removeElement(self, nums: List[int], val: int) -> int:
         k = 0
