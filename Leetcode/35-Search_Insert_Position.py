@@ -1,6 +1,7 @@
 from typing import List
 
 class Solution:
+# Re-Solved on 4/24/2026
     def searchInsert(self, nums: List[int], target: int) -> int:
         left, right = 0, len(nums) - 1
         while left <= right:
