@@ -3,6 +3,7 @@ nums2 = [1,3,4,2]
 nums3 = [2,1,3,4]
 
 class Solution:
+# Re-Solved 4/25/2026
     # Time Complexity: O(n^2) - Nested Loops
     # Space Complexity: O(n) - Dictionary and Answer List
     def nextGreaterElement(self, nums1: list[int], nums2: list[int]) -> list[int]: 
