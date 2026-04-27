@@ -2,6 +2,7 @@ from typing import List
 
 
 class Solution:
+# Re-Solved 4/26/2026
     def plusOne(self, digits: List[int]) -> List[int]:
         # Reverse the integer array to make addition easier
         digits = digits[::-1]
