@@ -1,4 +1,5 @@
 class Solution:
+# Re-Solved 4/28/2026
     # Brute force approach
     def mySqrt(self, x: int) -> int:
         res = 0
